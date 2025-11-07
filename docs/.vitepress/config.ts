@@ -30,9 +30,8 @@ export default defineConfig({
 					{
 						text: '开始',
 						items: [
-							{ text: '简介&收费', link: 'introduction' },
+							{ text: '简介&付费', link: 'introduction' },
 							{ text: '快速开始', link: 'getting-started' },
-							{ text: '编程思想', link: 'thinking' },
 						],
 					},
 					{

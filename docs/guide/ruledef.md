@@ -108,16 +108,19 @@ ruledef(
             quantity = maxQuantity
         }
         if (quantity !== self.quantity) {
-            setTimeout(() => {
+            deferrun(() => {
                 self.quantity = quantity
             })
         }
     }
 )
+
+const deferrun = (fn: () => void) => setTimeout(fn)
+// const deferrun = (fn: () => void) => Promise.resolve().then(fn)
 ```
 <!-- prettier-ignore-end -->
 
-由于结构体都是开放的、纯粹的，所以无法在赋值时进行拦截。不过我们可以通过定义一个规则来观察某个字段并修正自己。这就导致了递归，因为递归可能会导致堆栈溢出，所以我们巧妙地借助`setTimeout`来放空当前堆栈，在下一个调用帧来修正自己。
+由于结构体都是开放的、纯粹的，所以无法在赋值时进行拦截。不过我们可以通过定义一个规则来观察某个字段并修正自己。这就导致了递归，因为递归可能会导致堆栈溢出，所以我们推迟到当前调用栈清空之后，再修正自己。
 
 ## 两个规则互相触发
 
